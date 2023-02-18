@@ -39,12 +39,12 @@ func main() {
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"GET", "POST", "OPTIONS"},
-		AllowHeaders: []string{"Origin", "Content-Type"},
+		AllowMethods: []string{"GET", "POST", "PUT", "OPTIONS"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Accept-Encoding", "accept", "origin", "Cache-Control", "X-Requested-With"},
 	}))
 
 	r.POST("/query", graphHandler())
-	r.GET("/", playgroundHandler())
+	r.GET("/playground", playgroundHandler())
 	err := r.Run(defaultPort)
 
 	if err != nil {
