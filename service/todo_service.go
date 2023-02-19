@@ -9,7 +9,7 @@ import (
 func (s *Service) CreateTodo(todo *model.CreateTodoInput) (*model.Todo, error) {
 
 	t := model.Todo{
-		Text:   todo.Text,
+		Task:   todo.Task,
 		UserID: todo.UserID,
 	}
 

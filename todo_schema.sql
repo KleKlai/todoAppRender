@@ -26,7 +26,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.todos (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    text character varying(255),
+    task character varying(255),
     done boolean DEFAULT false,
     -- user_id uuid,
     user_id character varying(255),
