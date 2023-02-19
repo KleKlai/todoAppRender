@@ -18,7 +18,7 @@ type Todo {
       key: "gorm"
       value: "primary_key;type:uuid;default:gen_random_uuid()"
     )
-  text: String!
+  task: String!
   done: Boolean!
   userID: String!
 }
@@ -32,7 +32,7 @@ type User {
 }
 
 input CreateTodoInput {
-  text: String!
+  task: String!
   userId: String!
 }
 

@@ -89,7 +89,6 @@ func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error
 
 // Todo is the resolver for the todo field.
 func (r *queryResolver) Todo(ctx context.Context, id string) (*model.Todo, error) {
-
 	res, err := r.Service.GetTodoByID(id)
 
 	if err != nil {

@@ -65,7 +65,7 @@ type ComplexityRoot struct {
 	Todo struct {
 		Done   func(childComplexity int) int
 		ID     func(childComplexity int) int
-		Text   func(childComplexity int) int
+		Task   func(childComplexity int) int
 		UserID func(childComplexity int) int
 	}
 
@@ -238,12 +238,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Todo.ID(childComplexity), true
 
-	case "Todo.text":
-		if e.complexity.Todo.Text == nil {
+	case "Todo.task":
+		if e.complexity.Todo.Task == nil {
 			break
 		}
 
-		return e.complexity.Todo.Text(childComplexity), true
+		return e.complexity.Todo.Task(childComplexity), true
 
 	case "Todo.userID":
 		if e.complexity.Todo.UserID == nil {
@@ -599,8 +599,8 @@ func (ec *executionContext) fieldContext_Mutation_createTodo(ctx context.Context
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -725,8 +725,8 @@ func (ec *executionContext) fieldContext_Mutation_deleteTodo(ctx context.Context
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -911,8 +911,8 @@ func (ec *executionContext) fieldContext_Query_todos(ctx context.Context, field 
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -1077,8 +1077,8 @@ func (ec *executionContext) fieldContext_Query_todo(ctx context.Context, field g
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -1141,8 +1141,8 @@ func (ec *executionContext) fieldContext_Query_getTodoOfUserByStatus(ctx context
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -1336,8 +1336,8 @@ func (ec *executionContext) fieldContext_Todo_id(ctx context.Context, field grap
 	return fc, nil
 }
 
-func (ec *executionContext) _Todo_text(ctx context.Context, field graphql.CollectedField, obj *model.Todo) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Todo_text(ctx, field)
+func (ec *executionContext) _Todo_task(ctx context.Context, field graphql.CollectedField, obj *model.Todo) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Todo_task(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1350,7 +1350,7 @@ func (ec *executionContext) _Todo_text(ctx context.Context, field graphql.Collec
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Text, nil
+		return obj.Task, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1367,7 +1367,7 @@ func (ec *executionContext) _Todo_text(ctx context.Context, field graphql.Collec
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Todo_text(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Todo_task(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Todo",
 		Field:      field,
@@ -1685,8 +1685,8 @@ func (ec *executionContext) fieldContext_User_todos(ctx context.Context, field g
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_Todo_id(ctx, field)
-			case "text":
-				return ec.fieldContext_Todo_text(ctx, field)
+			case "task":
+				return ec.fieldContext_Todo_task(ctx, field)
 			case "done":
 				return ec.fieldContext_Todo_done(ctx, field)
 			case "userID":
@@ -3478,18 +3478,18 @@ func (ec *executionContext) unmarshalInputCreateTodoInput(ctx context.Context, o
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"text", "userId"}
+	fieldsInOrder := [...]string{"task", "userId"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
 			continue
 		}
 		switch k {
-		case "text":
+		case "task":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("text"))
-			it.Text, err = ec.unmarshalNString2string(ctx, v)
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("task"))
+			it.Task, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -3798,9 +3798,9 @@ func (ec *executionContext) _Todo(ctx context.Context, sel ast.SelectionSet, obj
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "text":
+		case "task":
 
-			out.Values[i] = ec._Todo_text(ctx, field, obj)
+			out.Values[i] = ec._Todo_task(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
