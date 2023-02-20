@@ -68,7 +68,13 @@ func (r *mutationResolver) UpdateTodoDone(ctx context.Context, input model.Updat
 
 // UpdateTodoTask is the resolver for the updateTodoTask field.
 func (r *mutationResolver) UpdateTodoTask(ctx context.Context, input model.UpdateTodoTaskInput) (*model.UpdateTodoTask, error) {
-	panic(fmt.Errorf("not implemented: UpdateTodoTask - updateTodoTask"))
+	res, err := r.Service.UpdateTodoTask(&input)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
 
 // Todos is the resolver for the todos field.
