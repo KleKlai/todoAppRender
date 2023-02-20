@@ -66,6 +66,11 @@ func (r *mutationResolver) UpdateTodoDone(ctx context.Context, input model.Updat
 	return res, nil
 }
 
+// UpdateTodoTask is the resolver for the updateTodoTask field.
+func (r *mutationResolver) UpdateTodoTask(ctx context.Context, input model.UpdateTodoTaskInput) (*model.UpdateTodoTask, error) {
+	panic(fmt.Errorf("not implemented: UpdateTodoTask - updateTodoTask"))
+}
+
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	panic(fmt.Errorf("not implemented: Todos - todos"))

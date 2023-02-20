@@ -58,5 +58,6 @@ type RepositoryInterface interface {
 	GetTodoByUser(string) ([]*model.Todo, error)
 	GetTodoOfUserByStatus(string, bool) ([]*model.Todo, error)
 	UpdateTodoDone(model.Todo) (*model.Todo, error)
+	UpdateTodoTask(model.Todo) (*model.Todo, error)
 	DeleteTodo(string) (*model.Todo, error)
 }

@@ -29,6 +29,16 @@ type UpdateTodoDoneInput struct {
 	Done bool   `json:"done"`
 }
 
+type UpdateTodoTask struct {
+	ID   string `json:"id"`
+	Task string `json:"task"`
+}
+
+type UpdateTodoTaskInput struct {
+	ID   string `json:"id"`
+	Task string `json:"task"`
+}
+
 type User struct {
 	ID    string  `json:"id"`
 	Name  string  `json:"name"`

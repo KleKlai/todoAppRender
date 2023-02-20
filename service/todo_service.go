@@ -119,3 +119,29 @@ func (s *Service) UpdateTodoDone(todo *model.UpdateTodoDoneInput) (*model.Update
 
 	return &updateTodoDone, nil
 }
+
+func (s *Service) UpdateTodoTask(todo *model.UpdateTodoTaskInput) (*model.UpdateTodoTask, error) {
+
+	u := model.Todo{
+		ID:   todo.ID,
+		Task: todo.Task,
+	}
+
+	// Check if ID and Task is empty
+	if u.ID == "" {
+		return nil, fmt.Errorf("ID is empty")
+	}
+
+	res, err := s.repoService.UpdateTodoTask(u)
+
+	if err != nil {
+		return nil, fmt.Errorf("Todo not found")
+	}
+
+	updateTodoTask := model.UpdateTodoTask{
+		ID:   res.ID,
+		Task: res.Task,
+	}
+
+	return &updateTodoTask, nil
+}
